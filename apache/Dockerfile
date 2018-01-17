@@ -1,14 +1,2 @@
-# Set the base image
-FROM centos
-
-# Dockerfile author / maintainer 
-MAINTAINER Name <email.id@here> 
-
-# Update application repository list and install the Redis server. 
-RUN apt-get update && apt-get install -y redis-server
-
-# Expose default port
-EXPOSE 6379
-
-# Set the default command
-ENTRYPOINT ["/usr/bin/redis-server"]
+FROM httpd:2.4
+COPY ./public-html/ /usr/local/apache2/htdocs/

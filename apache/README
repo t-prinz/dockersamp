@@ -1,0 +1,38 @@
+# Build the docker image from the Dockerfile
+# -t - repository names (optionally with tags)
+
+docker build -t my-apache2 .
+
+# Run the image and expose port 80 from the container to a random port
+# -d - detach and run in the background
+# -i - keep stdin open even if not attached
+# -t - allocate a pseudo tty
+# -P - publish all exposed ports to randoms port
+# --name - assign a name to the container (otherwise it gets a random name)
+# --rm - automatically remove container when it exits
+
+docker run --rm -ditP --name trey my-apache2
+
+# Find the random host port
+
+docker port <container id>
+
+# Run the image and expose port 80 from the container to a specific port
+# -p - publish a containers ports to the host
+
+docker run --rm -dit -p 127.0.0.1:32768:80 --name trey my-apache2
+
+# Kill and remove a running container
+# To do the steps separately:
+# docker container kill <container id>
+# docker container rm <container id>
+#
+# To show all containers, not just running containers:
+# docker ps -a
+
+docker ps
+docker container rm -f <container id>
+
+# To attach to the container image and run /bin/bash
+
+docker run --rm -a STDIN -a STDOUT -a STDERR -it -p 127.0.0.1:32768:80 --name trey my-apache2 /bin/bash
