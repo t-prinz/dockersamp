@@ -1,5 +1,0 @@
-docker build -t hello .
-firewall-cmd --add-service=http --permanent
-firewall-cmd --reload
-docker run -p 80:80 hello &
-curl http://localhost
